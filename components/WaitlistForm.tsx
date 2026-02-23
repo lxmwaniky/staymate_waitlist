@@ -53,9 +53,9 @@ export default function WaitlistForm() {
       setName("");
       setEmail("");
       setGender("");
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatus("error");
-      setMessage(err.message || "An error occurred.");
+      setMessage((err as Error).message || "An error occurred.");
     }
   };
 
@@ -146,7 +146,7 @@ export default function WaitlistForm() {
           ) : status === "success" ? (
             <>
               <CheckCircle2 className="w-4 h-4" />
-              <span>You're In!</span>
+              <span>You&apos;re In!</span>
             </>
           ) : (
             <>

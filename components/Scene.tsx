@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Points, PointMaterial, Float } from "@react-three/drei";
 import * as THREE from "three";
@@ -12,7 +12,7 @@ function ConnectionSphere() {
   const ref = useRef<THREE.Points>(null!);
   
   // Generate points on a sphere
-  const positions = useMemo(() => {
+  const [positions] = useState(() => {
     const pos = new Float32Array(PARTICLE_COUNT * 3);
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const theta = Math.random() * Math.PI * 2;
@@ -25,7 +25,7 @@ function ConnectionSphere() {
       pos[i * 3 + 2] = z;
     }
     return pos;
-  }, []);
+  });
 
   useFrame((state) => {
     if (!ref.current) return;
@@ -56,17 +56,15 @@ function FloatingParticles() {
     const ref = useRef<THREE.Points>(null!);
     const count = 500;
     
-    const [positions, speeds] = useMemo(() => {
+    const [positions] = useState(() => {
         const pos = new Float32Array(count * 3);
-        const spd = new Float32Array(count);
         for (let i = 0; i < count; i++) {
             pos[i * 3] = (Math.random() - 0.5) * 10;
             pos[i * 3 + 1] = (Math.random() - 0.5) * 10;
             pos[i * 3 + 2] = (Math.random() - 0.5) * 10;
-            spd[i] = Math.random() * 0.02 + 0.005;
         }
-        return [pos, spd];
-    }, []);
+        return pos;
+    });
 
     useFrame(() => {
         if (!ref.current) return;

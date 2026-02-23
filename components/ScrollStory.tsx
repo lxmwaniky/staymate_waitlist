@@ -1,8 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 const SECTIONS = [
   {

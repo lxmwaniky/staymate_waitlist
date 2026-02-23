@@ -35,7 +35,7 @@ export default function Countdown() {
 
   return (
     <div className="flex items-center justify-center gap-2 sm:gap-4">
-      {units.map((u, i) => (
+      {units.map((u) => (
         <div key={u.label} className="flex flex-col items-center">
           <div className="w-16 sm:w-20 h-16 sm:h-20 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl backdrop-blur-md shadow-lg">
             <span className="text-2xl sm:text-4xl font-mono font-bold text-orange-400 tabular-nums">
