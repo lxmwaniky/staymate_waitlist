@@ -31,7 +31,7 @@ function ConnectionSphere() {
     if (!ref.current) return;
     const t = state.clock.getElapsedTime();
     // Rotate the sphere
-    ref.current.rotation.y = t * 0.05;
+    ref.current.rotation.y = t * 0.15;
     ref.current.rotation.x = Math.sin(t * 0.1) * 0.1;
   });
 
@@ -40,11 +40,11 @@ function ConnectionSphere() {
       <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
         <PointMaterial
           transparent
-          color="#fb923c" // Orange-400
-          size={0.015}
+          color="#fdba74" // Orange-300 (Brighter)
+          size={0.018}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={0.6}
+          opacity={0.8}
           blending={THREE.AdditiveBlending}
         />
       </Points>
@@ -68,7 +68,7 @@ function FloatingParticles() {
 
     useFrame(() => {
         if (!ref.current) return;
-        ref.current.rotation.y -= 0.001;
+        ref.current.rotation.y -= 0.002;
         ref.current.rotation.x += 0.0005;
     });
 
@@ -76,11 +76,11 @@ function FloatingParticles() {
         <Points ref={ref} positions={positions} stride={3}>
             <PointMaterial
                 transparent
-                color="#fdba74" // Orange-300
+                color="#ffedd5" // Orange-100 (Very bright)
                 size={0.02}
                 sizeAttenuation={true}
                 depthWrite={false}
-                opacity={0.3}
+                opacity={0.4}
             />
         </Points>
     );

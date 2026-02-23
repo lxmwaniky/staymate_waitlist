@@ -69,16 +69,16 @@ export default function WaitlistForm() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="w-full max-w-sm mx-auto relative group"
+      className="w-full max-w-md mx-auto relative group"
     >
       {/* Glow effect behind the form */}
       <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
 
-      <form onSubmit={handleSubmit} className="relative flex flex-col gap-3 p-6 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl shadow-2xl">
+      <form onSubmit={handleSubmit} className="relative flex flex-col gap-5 p-8 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl shadow-2xl">
         
         {/* Name Input */}
         <div className="relative group/input">
-          <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 group-focus-within/input:text-orange-400 transition-colors" />
+          <User className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within/input:text-orange-400 transition-colors" />
           <input
             type="text"
             value={name}
@@ -86,13 +86,13 @@ export default function WaitlistForm() {
             placeholder="Full name"
             required
             disabled={status === "loading" || status === "success"}
-            className="w-full pl-11 pr-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent focus:bg-white/10 transition-all text-sm"
+            className="w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent focus:bg-white/10 transition-all text-base"
           />
         </div>
 
         {/* Email Input */}
         <div className="relative group/input">
-          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 group-focus-within/input:text-orange-400 transition-colors" />
+          <Mail className="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within/input:text-orange-400 transition-colors" />
           <input
             type="email"
             value={email}
@@ -100,7 +100,7 @@ export default function WaitlistForm() {
             placeholder="student@university.ac.ke"
             required
             disabled={status === "loading" || status === "success"}
-            className="w-full pl-11 pr-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent focus:bg-white/10 transition-all text-sm"
+            className="w-full pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent focus:bg-white/10 transition-all text-base"
           />
         </div>
 
@@ -110,7 +110,7 @@ export default function WaitlistForm() {
             value={gender}
             onChange={(e) => setGender(e.target.value)}
             disabled={status === "loading" || status === "success"}
-            className="w-full px-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white/80 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent focus:bg-white/10 transition-all text-sm appearance-none cursor-pointer"
+            className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-xl text-white/80 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent focus:bg-white/10 transition-all text-base appearance-none cursor-pointer"
           >
             <option value="" className="bg-zinc-900 text-gray-500">Gender (optional)</option>
             <option value="male" className="bg-zinc-900">Male</option>
@@ -118,8 +118,8 @@ export default function WaitlistForm() {
             <option value="other" className="bg-zinc-900">Other</option>
           </select>
            {/* Custom arrow for select */}
-           <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none opacity-50">
-             <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+           <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none opacity-50">
+             <svg width="12" height="8" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
              </svg>
            </div>
@@ -132,7 +132,7 @@ export default function WaitlistForm() {
           whileTap={{ scale: 0.98 }}
           disabled={status === "loading" || status === "success" || !email || !name}
           className={cn(
-            "w-full py-3.5 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all shadow-lg",
+            "w-full py-4 rounded-xl font-medium text-base flex items-center justify-center gap-2 transition-all shadow-lg",
             status === "success" 
               ? "bg-green-500/20 text-green-400 border border-green-500/50" 
               : "bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:shadow-orange-500/25 border border-transparent"
@@ -140,18 +140,18 @@ export default function WaitlistForm() {
         >
           {status === "loading" ? (
             <>
-              <Loader2 className="w-4 h-4 animate-spin" />
+              <Loader2 className="w-5 h-5 animate-spin" />
               <span>Joining...</span>
             </>
           ) : status === "success" ? (
             <>
-              <CheckCircle2 className="w-4 h-4" />
+              <CheckCircle2 className="w-5 h-5" />
               <span>You&apos;re In!</span>
             </>
           ) : (
             <>
               <span>Join the Waitlist</span>
-              <ChevronRight className="w-4 h-4 opacity-70" />
+              <ChevronRight className="w-5 h-5 opacity-70" />
             </>
           )}
         </motion.button>
