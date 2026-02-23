@@ -63,7 +63,7 @@ export default function WaitlistForm() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-sm mx-auto">
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <input
           type="text"

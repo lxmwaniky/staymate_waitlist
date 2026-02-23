@@ -34,15 +34,15 @@ function ScrollSection({ emoji, title, description, index }: ScrollSectionProps)
   return (
     <div
       ref={ref}
-      className={`scroll-section flex flex-col ${isEven ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-6 md:gap-12 py-16 md:py-24 px-4`}
+      className={`scroll-section flex flex-col ${isEven ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-3 md:gap-6 py-6 md:py-8 px-1`}
     >
-      <div className="flex-shrink-0 w-20 h-20 md:w-28 md:h-28 rounded-2xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
-        <span className="text-4xl md:text-5xl">{emoji}</span>
+      <div className="flex-shrink-0 w-14 h-14 md:w-20 md:h-20 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center">
+        <span className="text-2xl md:text-3xl">{emoji}</span>
       </div>
 
-      <div className={`text-center ${isEven ? "md:text-left" : "md:text-right"} max-w-lg`}>
-        <h3 className="text-xl md:text-3xl font-bold mb-3">{title}</h3>
-        <p className="text-sm md:text-base text-gray-400 leading-relaxed">{description}</p>
+      <div className={`text-center ${isEven ? "md:text-left" : "md:text-right"} max-w-md`}>
+        <h3 className="text-base md:text-xl font-bold mb-1.5">{title}</h3>
+        <p className="text-xs md:text-sm text-gray-400 leading-relaxed">{description}</p>
       </div>
     </div>
   );
@@ -89,7 +89,7 @@ const SECTIONS = [
 
 export default function ScrollStory() {
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="max-w-md mx-auto">
       {SECTIONS.map((s, i) => (
         <ScrollSection key={i} index={i} emoji={s.emoji} title={s.title} description={s.description} />
       ))}
