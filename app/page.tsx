@@ -12,16 +12,11 @@ export default function HomePage() {
       {/* ===== HERO ===== */}
       <section className="relative z-10 flex flex-col items-center justify-center min-h-[100dvh] px-3 text-center">
         <div className="w-full max-w-md mx-auto">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-orange-400 mb-1 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-orange-400 mb-3 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             StayMate
           </h2>
 
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 backdrop-blur-md mb-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            <Users className="w-3 h-3 text-orange-400" />
-            <span className="text-[10px] sm:text-xs font-medium tracking-wide text-orange-300">Roommates, Reimagined</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tighter mb-2 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tighter mb-2 animate-in fade-in slide-in-from-bottom-6 duration-1000 delay-150">
             Find Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-300">Perfect Roommate</span>
           </h1>
 
