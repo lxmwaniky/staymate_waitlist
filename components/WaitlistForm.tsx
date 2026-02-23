@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabase";
-import { Loader2, CheckCircle2, AlertCircle, Mail } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, Mail, User, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const STUDENT_EMAIL_PATTERN = /\.(edu|ac\.[a-z]{2,})$/i;
 
@@ -63,20 +65,34 @@ export default function WaitlistForm() {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <input
-          type="text"
-          value={name}
-          onChange={(e) => { setName(e.target.value); if (status === "error") resetForm(); }}
-          placeholder="Full name"
-          required
-          disabled={status === "loading" || status === "success"}
-          className="w-full px-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500/40 backdrop-blur-sm transition-all text-sm"
-        />
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      className="w-full max-w-sm mx-auto relative group"
+    >
+      {/* Glow effect behind the form */}
+      <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
 
-        <div className="relative">
-          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+      <form onSubmit={handleSubmit} className="relative flex flex-col gap-3 p-6 rounded-2xl bg-black/40 border border-white/10 backdrop-blur-xl shadow-2xl">
+        
+        {/* Name Input */}
+        <div className="relative group/input">
+          <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 group-focus-within/input:text-orange-400 transition-colors" />
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => { setName(e.target.value); if (status === "error") resetForm(); }}
+            placeholder="Full name"
+            required
+            disabled={status === "loading" || status === "success"}
+            className="w-full pl-11 pr-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent focus:bg-white/10 transition-all text-sm"
+          />
+        </div>
+
+        {/* Email Input */}
+        <div className="relative group/input">
+          <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40 group-focus-within/input:text-orange-400 transition-colors" />
           <input
             type="email"
             value={email}
@@ -84,26 +100,43 @@ export default function WaitlistForm() {
             placeholder="student@university.ac.ke"
             required
             disabled={status === "loading" || status === "success"}
-            className="w-full pl-11 pr-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500/40 backdrop-blur-sm transition-all text-sm"
+            className="w-full pl-11 pr-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent focus:bg-white/10 transition-all text-sm"
           />
         </div>
 
-        <select
-          value={gender}
-          onChange={(e) => setGender(e.target.value)}
-          disabled={status === "loading" || status === "success"}
-          className="w-full px-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-orange-500/30 focus:border-orange-500/40 backdrop-blur-sm transition-all text-sm"
-        >
-          <option value="" className="bg-zinc-900">Gender (optional)</option>
-          <option value="male" className="bg-zinc-900">Male</option>
-          <option value="female" className="bg-zinc-900">Female</option>
-          <option value="other" className="bg-zinc-900">Other</option>
-        </select>
+        {/* Gender Select */}
+        <div className="relative">
+          <select
+            value={gender}
+            onChange={(e) => setGender(e.target.value)}
+            disabled={status === "loading" || status === "success"}
+            className="w-full px-5 py-3.5 bg-white/5 border border-white/10 rounded-xl text-white/80 focus:outline-none focus:ring-2 focus:ring-orange-500/50 focus:border-transparent focus:bg-white/10 transition-all text-sm appearance-none cursor-pointer"
+          >
+            <option value="" className="bg-zinc-900 text-gray-500">Gender (optional)</option>
+            <option value="male" className="bg-zinc-900">Male</option>
+            <option value="female" className="bg-zinc-900">Female</option>
+            <option value="other" className="bg-zinc-900">Other</option>
+          </select>
+           {/* Custom arrow for select */}
+           <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none opacity-50">
+             <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+             </svg>
+           </div>
+        </div>
 
-        <button
+        {/* Submit Button */}
+        <motion.button
           type="submit"
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
           disabled={status === "loading" || status === "success" || !email || !name}
-          className="w-full px-5 py-3.5 bg-orange-500 text-white rounded-xl font-medium hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm"
+          className={cn(
+            "w-full py-3.5 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all shadow-lg",
+            status === "success" 
+              ? "bg-green-500/20 text-green-400 border border-green-500/50" 
+              : "bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:shadow-orange-500/25 border border-transparent"
+          )}
         >
           {status === "loading" ? (
             <>
@@ -113,38 +146,59 @@ export default function WaitlistForm() {
           ) : status === "success" ? (
             <>
               <CheckCircle2 className="w-4 h-4" />
-              <span>You&apos;re In!</span>
+              <span>You're In!</span>
             </>
           ) : (
-            "Join the Waitlist"
+            <>
+              <span>Join the Waitlist</span>
+              <ChevronRight className="w-4 h-4 opacity-70" />
+            </>
           )}
-        </button>
+        </motion.button>
       </form>
 
-      {status === "success" && (
-        <div className="mt-4 flex items-center gap-2 text-green-400 text-sm justify-center animate-in fade-in slide-in-from-bottom-2">
-          <CheckCircle2 className="w-4 h-4 shrink-0" />
-          <p>{message}</p>
-        </div>
-      )}
+      {/* Status Messages */}
+      <AnimatePresence mode="wait">
+        {status === "success" && (
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            exit={{ opacity: 0 }}
+            className="mt-4 flex items-center gap-2 text-green-400 text-sm justify-center bg-green-500/10 p-3 rounded-xl border border-green-500/20"
+          >
+            <CheckCircle2 className="w-4 h-4 shrink-0" />
+            <p>{message}</p>
+          </motion.div>
+        )}
 
-      {status === "duplicate" && (
-        <div className="mt-4 flex items-center gap-2 text-amber-400 text-sm justify-center animate-in fade-in slide-in-from-bottom-2">
-          <AlertCircle className="w-4 h-4 shrink-0" />
-          <p>{message}</p>
-        </div>
-      )}
+        {status === "duplicate" && (
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            exit={{ opacity: 0 }}
+            className="mt-4 flex items-center gap-2 text-amber-400 text-sm justify-center bg-amber-500/10 p-3 rounded-xl border border-amber-500/20"
+          >
+            <AlertCircle className="w-4 h-4 shrink-0" />
+            <p>{message}</p>
+          </motion.div>
+        )}
 
-      {status === "error" && (
-        <div className="mt-4 flex items-center gap-2 text-red-400 text-sm justify-center animate-in fade-in slide-in-from-bottom-2">
-          <AlertCircle className="w-4 h-4 shrink-0" />
-          <p>{message}</p>
-        </div>
-      )}
+        {status === "error" && (
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            exit={{ opacity: 0 }}
+            className="mt-4 flex items-center gap-2 text-red-400 text-sm justify-center bg-red-500/10 p-3 rounded-xl border border-red-500/20"
+          >
+            <AlertCircle className="w-4 h-4 shrink-0" />
+            <p>{message}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <p className="text-xs text-gray-600 text-center mt-3">
+      <p className="text-[10px] text-white/30 text-center mt-4">
         Only student emails (.edu, .ac.ke, etc.) are accepted.
       </p>
-    </div>
+    </motion.div>
   );
 }

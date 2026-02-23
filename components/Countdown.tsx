@@ -34,13 +34,15 @@ export default function Countdown() {
   ];
 
   return (
-    <div className="flex items-center justify-center gap-3 sm:gap-4">
-      {units.map((u) => (
+    <div className="flex items-center justify-center gap-2 sm:gap-4">
+      {units.map((u, i) => (
         <div key={u.label} className="flex flex-col items-center">
-          <span className="text-2xl sm:text-3xl md:text-4xl font-bold tabular-nums text-orange-400">
-            {pad(u.value)}
-          </span>
-          <span className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wider mt-1">
+          <div className="w-16 sm:w-20 h-16 sm:h-20 flex items-center justify-center bg-white/5 border border-white/10 rounded-xl backdrop-blur-md shadow-lg">
+            <span className="text-2xl sm:text-4xl font-mono font-bold text-orange-400 tabular-nums">
+              {pad(u.value)}
+            </span>
+          </div>
+          <span className="text-[10px] text-gray-500 uppercase tracking-widest mt-2 font-medium">
             {u.label}
           </span>
         </div>
