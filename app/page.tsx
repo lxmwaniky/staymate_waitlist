@@ -72,14 +72,20 @@ export default function HomePage() {
 
               {/* Download APK Button */}
               <motion.div variants={itemVariants} className="w-full flex justify-center lg:justify-start">
-                <a
+                <motion.a
                   href="/staymate-release.apk"
                   download
-                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/10 transition-all group overflow-hidden relative"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 shadow-[0_0_20px_rgba(249,115,22,0.3)] hover:shadow-[0_0_30px_rgba(249,115,22,0.5)] transition-all duration-300 group relative overflow-hidden"
                 >
-                  <Download className="w-4 h-4 text-orange-400" />
-                  <span className="text-sm font-medium tracking-wide">Download Android App</span>
-                </a>
+                  <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Download className="w-5 h-5 text-white animate-bounce-subtle" />
+                  <div className="flex flex-col items-start leading-none">
+                    <span className="text-[10px] uppercase tracking-widest text-white/70 mb-1 font-bold">Get the App</span>
+                    <span className="text-sm font-bold tracking-wide text-white">Download for Android</span>
+                  </div>
+                </motion.a>
               </motion.div>
             </div>
           </motion.div>
