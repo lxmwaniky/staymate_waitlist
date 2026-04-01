@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 import WaitlistForm from "@/components/WaitlistForm";
 import Scene from "@/components/Scene";
 import ScrollStory from "@/components/ScrollStory";
-import Countdown from "@/components/Countdown";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Download } from "lucide-react";
 
 const heroVariants = {
   hidden: { opacity: 0 },
@@ -65,18 +64,22 @@ export default function HomePage() {
               <span className="text-gray-500 text-sm block mt-3">Built by students, for students.</span>
             </motion.p>
 
-            {/* Countdown & Form Container */}
+            {/* Form Container */}
             <div className="w-full max-w-md flex flex-col gap-8">
-              <motion.div variants={itemVariants} className="p-5 rounded-2xl bg-black/20 backdrop-blur-sm border border-white/5 w-full">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
-                  <p className="text-[10px] text-gray-500 uppercase tracking-widest font-medium">Launching In</p>
-                  <p className="text-[10px] text-gray-500 font-mono">March 16, 2026</p>
-                </div>
-                <Countdown />
-              </motion.div>
-
               <motion.div variants={itemVariants} className="w-full">
                 <WaitlistForm />
+              </motion.div>
+
+              {/* Download APK Button */}
+              <motion.div variants={itemVariants} className="w-full flex justify-center lg:justify-start">
+                <a
+                  href="/staymate-release.apk"
+                  download
+                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/10 transition-all group overflow-hidden relative"
+                >
+                  <Download className="w-4 h-4 text-orange-400" />
+                  <span className="text-sm font-medium tracking-wide">Download Android App</span>
+                </a>
               </motion.div>
             </div>
           </motion.div>
